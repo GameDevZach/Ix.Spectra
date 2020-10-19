@@ -31,6 +31,14 @@ namespace Ix
 
                 EditorGUILayout.BeginVertical(style);
                 m.p = (Palette)EditorGUILayout.ObjectField("Palette:", m.p, typeof(Palette), true);
+
+                if (GUILayout.Button("Next", GUILayout.Height(30)))
+                {
+                    Undo.RecordObject(target, "Next color scheme");
+                    m.RandomizeGradient();
+                    m.SetColors();
+                }
+
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.Separator();
 
@@ -65,9 +73,12 @@ namespace Ix
                     EditorGUILayout.BeginVertical(style);
                     m.nColors = EditorGUILayout.IntSlider("Colors", m.nColors, 1, 10);
 
-                    for (int i = 0; i < m.p.colors.Length; i++)
+                    if (m.p.colors != null)
                     {
-                        m.p.colors[i] = EditorGUILayout.ColorField(m.p.colors[i]);
+                        for (int i = 0; i < m.p.colors.Length; i++)
+                        {
+                            m.p.colors[i] = EditorGUILayout.ColorField(m.p.colors[i]);
+                        }
                     }
 
                     EditorGUILayout.Separator();

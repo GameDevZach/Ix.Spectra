@@ -10,15 +10,15 @@ namespace Ix
 
             public Palette p;
 
-            public float hMin;
-            public float hMax;
-            public float sMin;
-            public float sMax;
-            public float vMin;
-            public float vMax;
-            public int nKeys;
+            public float hMin = 0;
+            public float hMax = 1;
+            public float sMin = 0;
+            public float sMax = 1;
+            public float vMin = 0;
+            public float vMax = 1;
+            public int nKeys = 5;
 
-            public int nColors;
+            public int nColors = 3;
 
             public void RandomizeGradient()
             {
@@ -48,9 +48,9 @@ namespace Ix
             public void SetColors()
             {
                 p.colors = new Color[nColors];
-                for (int i = 0; i < nColors + 1; i++)
+                for (int i = 0; i < nColors; i++)
                 {
-                    float t = (i * (1.0f / (nColors + 1)));
+                    float t = (i * (1.0f / nColors));
                     p.colors[i] = p.gradient.Evaluate(t);
                 }
             }
